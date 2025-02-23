@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
-import firstPlace from '../../../../../public/medal_gold.svg'
-import secondPlace from '../../../../../public/medal_silver.svg'
-import thirdPlace from '../../../../../public/medal_bronze.svg'
+import firstPlace from '../../../../../../public/medal_gold.svg'
+import secondPlace from '../../../../../../public/medal_silver.svg'
+import thirdPlace from '../../../../../../public/medal_bronze.svg'
 
 function Ranking() {
   return (

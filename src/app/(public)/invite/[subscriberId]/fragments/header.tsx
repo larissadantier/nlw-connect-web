@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import logo from '../../../../../public/assets/logo.svg'
+import logo from '../../../../../../public/assets/logo.svg'
 function Header() {
   return (
     <>
