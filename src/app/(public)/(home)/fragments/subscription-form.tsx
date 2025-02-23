@@ -1,25 +1,71 @@
+'use client'
+import { useForm } from 'react-hook-form'
+import z from 'zod'
 import { User, Mail } from 'lucide-react'
+import { zodResolver } from '@hookform/resolvers/zod'
+
 import { Input } from '@/components'
 
+const subscriberSchema = z.object({
+  name: z.string().min(2, 'Digite o seu nome completo').nonempty(),
+  email: z.string().email('Digite um e-mail válido').nonempty(),
+})
+
+type SubscriptionSchema = z.infer<typeof subscriberSchema>
+
 function SubscriptionForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SubscriptionSchema>({
+    resolver: zodResolver(subscriberSchema),
+  })
+
+  const onSubmit = (data: SubscriptionSchema) => console.log(data)
+
   return (
     <form
       id="subscriberForm"
+      onSubmit={handleSubmit(onSubmit)}
       className="flex h-full flex-col items-center justify-center gap-4"
     >
-      <Input.Root>
-        <Input.Icon>
-          <User className="size-5" />
-        </Input.Icon>
-        <Input.Field placeholder="Nome Completo" type="text" />
-      </Input.Root>
+      <div className="w-full space-y-2">
+        <Input.Root error={!!errors.name}>
+          <Input.Icon>
+            <User className="size-5" />
+          </Input.Icon>
+          <Input.Field
+            placeholder="Nome Completo"
+            type="text"
+            {...register('name')}
+          />
+        </Input.Root>
 
-      <Input.Root>
-        <Input.Icon>
-          <Mail className="size-5" />
-        </Input.Icon>
-        <Input.Field placeholder="E-mail" type="email" />
-      </Input.Root>
+        {errors.name && (
+          <p className="ml-1 font-semibold text-danger text-xs">
+            {errors.name.message}
+          </p>
+        )}
+      </div>
+      <div className="w-full space-y-2">
+        <Input.Root error={!!errors.email}>
+          <Input.Icon>
+            <Mail className="size-5" />
+          </Input.Icon>
+          <Input.Field
+            placeholder="E-mail"
+            type="email"
+            {...register('email')}
+          />
+        </Input.Root>
+
+        {errors.email && (
+          <p className="ml-1 font-semibold text-danger text-xs">
+            {errors.email.message}
+          </p>
+        )}
+      </div>
     </form>
   )
 }

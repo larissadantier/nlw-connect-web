@@ -4,6 +4,8 @@ import Stats from './fragments/stats'
 import InviteLinkInput from './fragments/invite-link-input'
 
 function Invite() {
+  const inviteLink = 'http://localhost:3000/invite/1234'
+
   return (
     <section className="justify-beetwen flex min-h-dvh flex-col items-center gap-16 md:flex-row">
       <div className="flex w-full max-w-[610px] flex-col items-center gap-9 md:items-start">
@@ -22,7 +24,7 @@ function Invite() {
             </p>
           </div>
 
-          <InviteLinkInput />
+          <InviteLinkInput inviteLink={inviteLink} />
 
           <Stats />
         </div>
