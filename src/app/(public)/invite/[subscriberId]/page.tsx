@@ -2,6 +2,7 @@ import Ranking from './fragments/ranking'
 import Header from './fragments/header'
 import Stats from './fragments/stats'
 import InviteLinkInput from './fragments/invite-link-input'
+import { env } from '@/env'
 
 interface IInvitePageProps {
   params: Promise<{
@@ -11,7 +12,7 @@ interface IInvitePageProps {
 
 async function Invite({ params }: IInvitePageProps) {
   const { subscriberId } = await params
-  const inviteLink = `http://localhost:3333/invites/${subscriberId}`
+  const inviteLink = `${env.SERVER_URL}/${subscriberId}`
 
   return (
     <section className="justify-beetwen flex min-h-dvh flex-col items-center gap-16 md:flex-row">
