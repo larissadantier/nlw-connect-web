@@ -3,8 +3,15 @@ import Header from './fragments/header'
 import Stats from './fragments/stats'
 import InviteLinkInput from './fragments/invite-link-input'
 
-function Invite() {
-  const inviteLink = 'http://localhost:3000/invite/1234'
+interface IInvitePageProps {
+  params: Promise<{
+    subscriberId: string
+  }>
+}
+
+async function Invite({ params }: IInvitePageProps) {
+  const { subscriberId } = await params
+  const inviteLink = `http://localhost:3333/invites/${subscriberId}`
 
   return (
     <section className="justify-beetwen flex min-h-dvh flex-col items-center gap-16 md:flex-row">
@@ -26,7 +33,7 @@ function Invite() {
 
           <InviteLinkInput inviteLink={inviteLink} />
 
-          <Stats />
+          <Stats subscriberId={subscriberId} />
         </div>
       </div>
 
